@@ -9,10 +9,12 @@ import sys
 import time
 
 import servicemanager
-import win32service
 import win32serviceutil
 
+import win32service
 from ServiceBaseClass.SMWinService import SMWinservice
+
+sys.path += ['filecopy_service/ServiceBaseClass']
 
 
 class PyWinCopy(SMWinservice):
