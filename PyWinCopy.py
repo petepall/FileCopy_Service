@@ -2,8 +2,6 @@
     Windows service to copy a file from one location to another
     at a certain interval.
 '''
-
-
 import os
 import sys
 import time
