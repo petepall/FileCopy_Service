@@ -30,6 +30,8 @@ class PyWinCopy(SMWinservice):
         self.ReportServiceStatus(win32service.SERVICE_RUNNING)
         while self.isrunning:
             # Copy the files from the server to a local folder
+            # FIXME: perform validation of the paths
+            # TODO: build in function to trigger only when a file is changed.
             os.system('robocopy \\tamun020\\reports '
                       'c:\\JIS53_backup /MIR')
             time.sleep(60)
