@@ -19,9 +19,9 @@ sys.path += ['filecopy_service/ServiceBaseClass',
              'filecopy_service/HelperModules']
 
 
-class PyWinCopy(SMWinservice):
-    _svc_name_ = "PyWinCopy"
-    _svc_display_name_ = "Python file copy service"
+class Jis53Backup(SMWinservice):
+    _svc_name_ = "Jis53Backup"
+    _svc_display_name_ = "JIS53 backup copy"
     _svc_description_ = "Service to copy files from server to local drive"
 
     def start(self):
@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     if len(sys.argv) == 1:
         servicemanager.Initialize()
-        servicemanager.PrepareToHostSingle(PyWinCopy)
+        servicemanager.PrepareToHostSingle(Jis53Backup)
         servicemanager.StartServiceCtrlDispatcher()
     else:
-        win32serviceutil.HandleCommandLine(PyWinCopy)
+        win32serviceutil.HandleCommandLine(Jis53Backup)
