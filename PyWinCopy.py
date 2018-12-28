@@ -2,18 +2,18 @@
     Windows service to copy a file from one location to another
     at a certain interval.
 '''
-import os
 import sys
 import time
+from distutils.dir_util import copy_tree
 
 import servicemanager
 import win32serviceutil
 
 import win32service
+from HelperModules.CheckFileExistance import check_folder_exists, create_folder
+from HelperModules.ReadConfig import (check_config_file_exists,
+                                      create_config_file, read_config_file)
 from ServiceBaseClass.SMWinService import SMWinservice
-from HelperModules.ReadConfig import check_config_file_exists, \
-    create_config_file, read_config_file
-
 
 sys.path += ['filecopy_service/ServiceBaseClass',
              'filecopy_service/HelperModules']
@@ -25,6 +25,10 @@ class PyWinCopy(SMWinservice):
     _svc_description_ = "Service to copy files from server to local drive"
 
     def start(self):
+        self.conf = read_config_file()
+        if not check_folder_exists(self.conf['dest']):
+            create_folder(self.conf['dest'])
+
         self.isrunning = True
 
     def stop(self):
@@ -34,18 +38,15 @@ class PyWinCopy(SMWinservice):
         self.ReportServiceStatus(win32service.SERVICE_RUNNING)
         while self.isrunning:
             # Copy the files from the server to a local folder
-            # FIXME: perform validation of the paths
-            # TODO: build in function to trigger only when a file is changed.
-            os.system(f'robocopy {config["origin"]} {config["dest"]} /MIR')
-            time.sleep(60)
+            # TODO: build function to trigger only when a file is changed.
+            copy_tree(self.conf['origin'], self.conf['dest'], update=1)
+            time.sleep(30)
 
 
 if __name__ == '__main__':
-    if check_config_file_exists():
-        config = read_config_file()
-    else:
-        create_config_file()
-        config = read_config_file()
+    if sys.argv[1] == 'install':
+        if not check_config_file_exists():
+            create_config_file()
 
     if len(sys.argv) == 1:
         servicemanager.Initialize()
