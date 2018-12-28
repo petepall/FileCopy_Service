@@ -13,24 +13,24 @@ The service can be called using Python or if an .exe is built using the exe.
 **Python:**
 
 
-        python WindowsService.py install
+        python JIS53_Backup.py install
 
 **Using .exe:**
 
-       WindowsService.exe install
+       JIS53_Backup.exe install
 ___________________________________________________
 * _To start the service after install use:_
 
-      WindowsService start
+      JIS53_Backup start
 
 * _To stop the service use:_
 
-      WindowsService stop
+      JIS53_Backup stop
 
 * _To update an installed service use:_
 
-      WindowsService update
+      JIS53_Backup update
 
 * _To remove an installed service use:_
 
-      WindowsService remoce
+      JIS53_Backup remove
