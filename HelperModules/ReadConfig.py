@@ -1,3 +1,9 @@
+import sys
+from HelperModules.CheckFileExistance import check_folder_exists, create_folder
+
+sys.path += ['filecopy_service/HelperModules']
+
+CONFIG_FOLDER = 'c:\\PyWinCopy\\'
 CONFIG_FILE = 'c:\\PyWinCopy\\config.json'
 
 
@@ -12,6 +18,9 @@ def check_config_file_exists():
 
 def create_config_file():
     import json
+
+    if not check_folder_exists(CONFIG_FOLDER):
+            create_folder(CONFIG_FOLDER)
 
     originating_file: str = input('Enter copy from file location: ')
     destination_file: str = input('Enter copy to file location: ')
