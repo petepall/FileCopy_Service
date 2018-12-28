@@ -13,6 +13,7 @@ pytest = "*"
 pytest-cov = "*"
 mypy = "*"
 "autopep8" = "*"
+pyinstaller = "*"
 
 [requires]
 python_version = "3.7"
