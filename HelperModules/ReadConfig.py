@@ -22,8 +22,8 @@ def create_config_file():
     if not check_folder_exists(CONFIG_FOLDER):
             create_folder(CONFIG_FOLDER)
 
-    originating_file: str = input('Enter copy from file location: ')
-    destination_file: str = input('Enter copy to file location: ')
+    originating_file: str = input('Enter "COPY FROM" file location: ')
+    destination_file: str = input('Enter "COPY TO" file location: ')
 
     config = {'origin': originating_file, 'dest': destination_file}
 
